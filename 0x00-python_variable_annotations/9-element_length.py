@@ -5,7 +5,7 @@
 from typing import Iterable, Sequence, Tuple, List
 
 
-def element_length(lst: Iterable[Sequence]) -> List[Tuple[Sequence]]:
+def element_length(lst: Iterable[Sequence]) -> List[Tuple[Sequence, int]]:
     """
     element_length - Make multiplier
     @lst: returns tuples for each value and its length
