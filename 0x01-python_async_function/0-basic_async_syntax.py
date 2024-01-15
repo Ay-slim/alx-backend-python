@@ -12,6 +12,6 @@ async def wait_random(max_delay: int = 10) -> float:
     @max_delay: Int specifiying maximum delay interval
     Returns: Float depicting the random value chosen between 0 and 10
     """
-    rand_val = random.uniform(0, 10)
+    rand_val = random.uniform(0, max_delay)
     await asyncio.sleep(rand_val)
     return rand_val
