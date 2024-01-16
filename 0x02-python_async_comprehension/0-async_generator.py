@@ -7,7 +7,7 @@ import asyncio
 from typing import Iterator
 
 
-async def async_generator() -> Iterator[int]:
+async def async_generator() -> Iterator[float]:
     """
     async_generator - Function to wait for a bit and yield a random int
     Returns: A generator
