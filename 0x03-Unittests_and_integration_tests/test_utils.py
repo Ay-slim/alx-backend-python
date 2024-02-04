@@ -19,3 +19,12 @@ class TestAccessNestedMap(unittest.TestCase):
                                path: Sequence, result: Any) -> None:
         """Function to test nested map function"""
         self.assertEqual(access_nested_map(n_dict, path), result)
+
+    @parameterized.expand([
+        ({}, ("a",)),
+        ({"a": 1}, ("a", "b"))
+    ])
+    def test_access_nested_map_exception(self, n_dict: Mapping,
+                                         path: Sequence) -> None:
+        """Function to test nested map function error"""
+        self.assertRaises(KeyError, access_nested_map(n_dict, path))
