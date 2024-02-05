@@ -23,3 +23,13 @@ class TestGithubOrgClient(unittest.TestCase):
         methodToSimulate.assert_called_once_with(
             "https://api.github.com/orgs/{}".format(org)
         )
+
+    def test_public_repos_url(self) -> None:
+        """Public repos url test"""
+        with patch(
+            "client.GithubOrgClient.org",
+            new_callable=PropertyMock,
+        ) as sample_org:
+            sample_org.return_value = {"repos_url": "test"}
+            testClass = GithubOrgClient("test")
+            self.assertEqual(testClass._public_repos_url, "test")
