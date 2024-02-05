@@ -4,7 +4,7 @@
 
 import unittest
 from parameterized import parameterized
-from utils import access_nested_map, get_json
+from utils import access_nested_map, get_json, memoize
 from typing import Dict, Mapping, Sequence, Any
 from unittest.mock import Mock, patch
 
@@ -46,3 +46,28 @@ class TestGetJson(unittest.TestCase):
             response = get_json(test_url)
             self.assertEqual(response, test_payload)
             req_obj.assert_called_once_with(test_url)
+
+
+class TestMemoize(unittest.TestCase):
+    """Class testing memoization"""
+
+    def test_memoize(self) -> None:
+        """Test the memoize decorator"""
+        class TestClass:
+            """A class to test memoization"""
+
+            def a_method(self) -> int:
+                """Return 42"""
+                return 42
+
+            @memoize
+            def a_property(self) -> int:
+                """Return the a_method"""
+                return self.a_method()
+
+        with patch.object(TestClass, "a_method") as afunc:
+            clsInstance = TestClass()
+            clsInstance.a_property
+            clsInstance.a_property
+            afunc.assert_called_once
+            self.assertEqual(clsInstance.a_property, afunc.return_value)
